@@ -7,19 +7,8 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="list-group mt-2">
-      <a *ngFor="let recipe of recipes" class="list-group-item mb-2" href="#">
-        <div class="item-detail">
-          <h4>{{ recipe.name }}</h4>
-          <p>{{ recipe.description }}</p>
-        </div>
-        <img
-        class="img-responsive"
-        [src]="recipe.imagePath" [alt]="recipe.name">
-      </a>
+      <app-recipe-item *ngFor="let recipeEl of recipes" [recipe]="recipeEl"></app-recipe-item>
     </div>
   </div>
 </div>
 
-
-
-<app-recipe-item></app-recipe-item>
