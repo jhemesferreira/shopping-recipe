@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shopping-recipe';
+  activedLink = 'recipe';
+
+  onNavigate(targetLink : string){
+    this.activedLink = targetLink;
+  }
 }
