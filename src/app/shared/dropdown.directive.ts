@@ -10,11 +10,12 @@ export class DropdownDirective {
 
   @HostListener('document:click', ['$event']) toggleOpen(eventData: Event){
    const menu = this.elRef.nativeElement.querySelector('.dropdown-menu');
+   this.isOpen = this.elRef.nativeElement.contains(eventData.target) ? !this.isOpen : false;
    if(this.isOpen){
-      this.renderer.removeClass(menu, 'show')
-    }else{
       this.renderer.addClass(menu, 'show')
+    }else{
+      this.renderer.removeClass(menu, 'show')
     }
-    this.isOpen = this.elRef.nativeElement.contains(eventData.target) ? !this.isOpen : false;
+
   }
 }

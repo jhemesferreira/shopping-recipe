@@ -14,13 +14,13 @@
       </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="navbar-nav" appDropdown>
+      <div class="navbar-nav">
         <div class="navbar-group">
           <div class="nav-item"><a class="nav-link" href="#" (click)="onSetlink('recipe')">Recipes</a></div>
           <div class="nav-item"><a class="nav-link"  href="#" (click)="onSetlink('shopping')">Shopping List</a></div>
         </div>
 
-        <div class="nav-item dropdown-center ml-auto">
+        <div class="nav-item dropdown-center ml-auto" appDropdown>
           <a class="nav-link dropdown-toggle"
             href="#" role="button"
             data-bs-toggle="dropdown"
