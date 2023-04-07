@@ -1,9 +1,8 @@
-<app-header (changeLink)="onNavigate($event)"></app-header>
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-recipes *ngIf="activedLink === 'recipe'"></app-recipes>
-      <app-shopping-list *ngIf="activedLink === 'shopping'"></app-shopping-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

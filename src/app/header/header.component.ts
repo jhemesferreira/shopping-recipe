@@ -6,9 +6,4 @@ import { Component, EventEmitter, Output } from "@angular/core";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent{
-  @Output() changeLink = new EventEmitter<string>();
-
-  onSetlink(targetLink: string) {
-    this.changeLink.emit(targetLink);
-  }
 }
