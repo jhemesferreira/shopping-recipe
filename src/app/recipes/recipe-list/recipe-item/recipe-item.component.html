@@ -1,4 +1,4 @@
-<a class="list-group-item mb-2" href="#" (click)="onSelect()">
+<a class="list-group-item mb-2" style="cursor: pointer;" [routerLink]="['/recipes', recipe.id]">
   <div class="item-detail">
     <h4>{{ recipe.name }}</h4>
     <p>{{ recipe.description }}</p>
