@@ -1,4 +1,8 @@
-<a class="list-group-item mb-2" style="cursor: pointer;" [routerLink]="[recipe.id]">
+<a class="list-group-item mb-2"
+  style="cursor: pointer;"
+  [routerLink]="[recipe.id]"
+  routerLinkActive="active"
+  >
   <div class="item-detail">
     <h4>{{ recipe.name }}</h4>
     <p>{{ recipe.description }}</p>
