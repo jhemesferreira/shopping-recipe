@@ -11,7 +11,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router){}
+  constructor(
+      private recipeService: RecipeService,
+      private route: ActivatedRoute,
+      private router: Router
+      ){}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -24,5 +28,9 @@ export class RecipeDetailComponent implements OnInit {
 
   onAddToShoppingList(): void {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+  }
+
+  onEditRecipe():void {
+    this.router.navigate(['edit'], {relativeTo: this.route})
   }
 }
