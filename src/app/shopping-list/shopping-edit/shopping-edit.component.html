@@ -32,7 +32,13 @@
       <div class="row mt-2">
         <div class="col-xs-12">
           <button class="btn btn-success me-2" type="submit" [disabled]="!formShopping.valid">{{ editMode ? 'update' : 'add' }}</button>
-          <button class="btn btn-danger me-2" type="button">Delete</button>
+          <button
+            *ngIf="editMode"
+            class="btn btn-danger me-2"
+            type="button"
+            (click)="onDelete()">
+            Delete
+          </button>
           <button class="btn btn-primary" type="button" (click)="onClearForm()">Clear</button>
         </div>
       </div>
