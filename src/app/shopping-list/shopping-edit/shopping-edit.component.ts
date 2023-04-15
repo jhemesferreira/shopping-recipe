@@ -36,22 +36,21 @@ export class ShoppingEditComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  onAdd(){
-    const name = this.formShopping.value.name;
-    const amount = this.formShopping.value.amount;
+  onSubmit(): void{
+    const value = this.formShopping.value;
+    const newIngredient = new Ingredient(value.name, value.amount);
     if(!this.editMode){
-      const ingredient = new Ingredient
-      (
-          this.formShopping.value.name,
-          this.formShopping.value.amount
-      );
-      this.shoppingListService.addIngredient(ingredient);
+      this.shoppingListService.addIngredient(newIngredient);
     }else{
       this.shoppingListService.editIngredient(
         this.indexIngredientEdit,
-        { name , amount });
+        newIngredient);
       this.editMode = false;
     }
+    this.onClearForm();
+  }
+
+  onClearForm(): void {
     this.formShopping.reset();
   }
 }
