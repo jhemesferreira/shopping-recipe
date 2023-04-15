@@ -9,7 +9,11 @@
             class="btn btn-success">
             Save
           </button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onCancel()"
+            >Cancel</button>
         </div>
       </div>
       <div class="row">
@@ -78,7 +82,10 @@
                 >
             </div>
             <div class="col-2">
-              <button class="btn btn-danger" type="button">X</button>
+              <button
+              class="btn btn-danger"
+              type="button"
+              >X</button>
             </div>
           </div>
         </div>
