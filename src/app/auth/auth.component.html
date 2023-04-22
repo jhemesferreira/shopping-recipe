@@ -1,6 +1,7 @@
 <div class="row container">
   <div class="col-12">
-    <form  #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+    <form  *ngIf="!isLoading; else loadingBlock" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
       <div class="form-group">
         <label for="email">E-mail</label>
         <input
@@ -39,5 +40,8 @@
           (click)="onSwitchMode()">Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
       </div>
     </form>
+    <ng-template #loadingBlock>
+      Loading....
+    </ng-template>
   </div>
 </div>
