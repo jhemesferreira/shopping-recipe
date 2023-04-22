@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { RecipeService } from "../recipes/recipe.service";
 import { Recipe } from "../recipes/recipe.model";
 
+const URL_RECIPES = 'https://angular-course-33335-default-rtdb.europe-west1.firebasedatabase.app/recipes.json';
+
 // Injectable is optinal theoretically => But we need to add as soon as a service gets another service injected
 @Injectable({
   providedIn: 'root'
@@ -15,11 +17,20 @@ export class DataStorageService
     const recipes = this.recipeService.getRecipes();
 
     this.http.put<Recipe[]>(
-        'https://angular-course-33335-default-rtdb.europe-west1.firebasedatabase.app/recipes.json',
+        URL_RECIPES,
         recipes
       )
       .subscribe(response => {
       console.log(response)
     });
+  }
+
+  fetchRecipes() {
+    this.http.get<Recipe[]>(
+      URL_RECIPES
+    )
+    .subscribe(recipes => {
+      this.recipeService.setRecipes(recipes);
+    })
   }
 }

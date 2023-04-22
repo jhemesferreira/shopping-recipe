@@ -50,6 +50,10 @@ export class RecipeService {
     this.recipeChange.next(this.recipes);
   }
 
+  setRecipes(recipes: Recipe[]): void {
+    this.recipes  = recipes;
+    this.recipeChange.next(this.recipes);
+  }
   updateRecipe(recipe: Recipe): void {
 
     this.recipes.forEach((r : Recipe, index: number) => {
