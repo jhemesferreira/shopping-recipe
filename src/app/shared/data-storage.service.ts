@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { RecipeService } from "../recipes/recipe.service";
 import { Recipe } from "../recipes/recipe.model";
+import { map } from "rxjs/operators";
 
 const URL_RECIPES = 'https://angular-course-33335-default-rtdb.europe-west1.firebasedatabase.app/recipes.json';
 
@@ -28,6 +29,14 @@ export class DataStorageService
   fetchRecipes() {
     this.http.get<Recipe[]>(
       URL_RECIPES
+    )
+    .pipe(
+      map(recipes => recipes.map(recipe => {
+        return {
+          ...recipe,
+          ingredients: recipe.ingredients ?? []
+        }
+      }))
     )
     .subscribe(recipes => {
       this.recipeService.setRecipes(recipes);
