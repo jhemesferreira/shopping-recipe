@@ -35,7 +35,10 @@
             routerLinkActive="active"
             >Authenticate</a></div>
         </div>
-        <div><a class="dropdown-item" style="cursor: pointer;" *ngIf="isAuthenticated">Logout</a></div>
+        <div><a class="dropdown-item" style="cursor: pointer;"
+           *ngIf="isAuthenticated"
+           (click)="onLogout()"
+           >Logout</a></div>
         <div class="nav-item dropdown-center ml-auto" appDropdown *ngIf="isAuthenticated">
           <a class="nav-link dropdown-toggle"
             role="button"
