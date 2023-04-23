@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="navbar-nav">
         <div class="navbar-group">
-          <div class="nav-item">
+          <div class="nav-item" *ngIf="isAuthenticated">
             <a
             class="nav-link"
             routerLink="/recipes"
@@ -28,15 +28,15 @@
             routerLink="/shopping-list"
             routerLinkActive="active"
             >Shopping List</a></div>
-          <div class="nav-item">
+          <div class="nav-item" *ngIf="!isAuthenticated">
             <a
             class="nav-link"
             routerLink="/auth"
             routerLinkActive="active"
             >Authenticate</a></div>
         </div>
-
-        <div class="nav-item dropdown-center ml-auto" appDropdown>
+        <div><a class="dropdown-item" style="cursor: pointer;" *ngIf="isAuthenticated">Logout</a></div>
+        <div class="nav-item dropdown-center ml-auto" appDropdown *ngIf="isAuthenticated">
           <a class="nav-link dropdown-toggle"
             role="button"
             data-bs-toggle="dropdown"

@@ -16,9 +16,8 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient){}
-
   user = new Subject<User>();
+  constructor(private http: HttpClient){}
 
   signUp(email: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
@@ -28,7 +27,7 @@ export class AuthService {
       password
     })
     .pipe(
-      tap(this.handleAuthentication),
+      tap(this.handleAuthentication.bind(this)),
       catchError(this.handleError),
     )
   }
@@ -40,7 +39,7 @@ export class AuthService {
       email,
       password
     }).pipe(
-      tap(this.handleAuthentication),
+      tap(this.handleAuthentication.bind(this)),
       catchError(this.handleError)
     )
   }
@@ -61,7 +60,7 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-
+    console.log(errorRes)
     const ERROR_TARGETS = {
       'EMAIL_EXISTS' : 'Email already exists!',
       'DEFAULT' : 'An error occured!',
