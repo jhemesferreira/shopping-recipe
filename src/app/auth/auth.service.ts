@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { throwError, catchError, Observable, Subject, tap } from 'rxjs'
+import { throwError, catchError, Observable, tap, BehaviorSubject } from 'rxjs'
 import { User } from "./user.module";
 
 export interface AuthResponseData {
@@ -16,7 +16,7 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
   constructor(private http: HttpClient){}
 
   signUp(email: string, password: string): Observable<AuthResponseData> {
@@ -24,7 +24,8 @@ export class AuthService {
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC3j2a7fAnh3qzb-aIzKSDpKB-Ep7PtKn4',
     {
       email,
-      password
+      password,
+      returnSecureToken: true
     })
     .pipe(
       tap(this.handleAuthentication.bind(this)),
@@ -37,7 +38,8 @@ export class AuthService {
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC3j2a7fAnh3qzb-aIzKSDpKB-Ep7PtKn4',
     {
       email,
-      password
+      password,
+      returnSecureToken: true
     }).pipe(
       tap(this.handleAuthentication.bind(this)),
       catchError(this.handleError)
