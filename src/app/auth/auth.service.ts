@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { throwError, catchError } from 'rxjs'
 
 interface AuthResponseData {
   idToken: string,
@@ -23,5 +24,14 @@ export class AuthService {
       email,
       password
     })
+    .pipe(
+      catchError(error => {
+        const ERROR_TARGETS = { 'EMAIL_EXISTS' : 'Email already exists!', 'DEFAULT' : 'An error occured!' };
+        const ERROR_TYPE = error.error.error.message ?? 'DEFAULT';
+        const ERROR_MESSAGE = ERROR_TARGETS[ERROR_TYPE] ?? ERROR_TARGETS['DEFAULT'];
+        console.error(ERROR_MESSAGE);
+        return throwError(() => (new Error(ERROR_MESSAGE)).message);
+      })
+    )
   }
 }
