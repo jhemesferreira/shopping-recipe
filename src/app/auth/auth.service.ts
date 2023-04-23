@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { throwError, catchError, Observable, tap, BehaviorSubject } from 'rxjs'
 import { User } from "./user.module";
+import { Router } from "@angular/router";
 
 export interface AuthResponseData {
   idToken: string,
@@ -17,7 +18,7 @@ export interface AuthResponseData {
 })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private router: Router){}
 
   signUp(email: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
@@ -48,6 +49,7 @@ export class AuthService {
 
   logout() {
     this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   private handleAuthentication(response: AuthResponseData){
@@ -63,6 +65,26 @@ export class AuthService {
     );
 
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  autoLogin() {
+    const userData: {
+      email: string,
+      id: string,
+      _token: string,
+      _tokenExpirationDate: string
+    } = JSON.parse(localStorage.getItem('userData'));
+
+    if(!userData){
+      return;
+    }
+
+    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+
+    if(loadedUser.token){
+      this.user.next(loadedUser);
+    }
   }
 
   private handleError(errorRes: HttpErrorResponse) {
