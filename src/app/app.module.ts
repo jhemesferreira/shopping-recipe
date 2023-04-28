@@ -20,6 +20,7 @@ import { RecipeService } from './recipes/recipe.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AlertComponent } from './shared/alert/alert.component';
     NoSelectedRecipeComponent,
     RecipeEditComponent,
     AuthComponent,
-    AlertComponent
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
